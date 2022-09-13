@@ -21,10 +21,63 @@ const productSchema = mongoose.Schema({
     },
     description:{
         type:String,
-        required:[true, "Please provide a name for this product"],
-
+        required:[true, "Please provide a name for this product"]
+    },
+    price:{
+        type: Number,
+        required:true,
+        min:[0, "Price can't be negative"]
+    },
+    unit:{
+        type: String,
+        required:true,
+        enum:{
+            values:["kg", "liter","pcs"],
+            message:"unit value can't be {VALUE}, MUSTBE kg/liters/pcs"
+        }
+    },
+    quantity:{
+        type: Number,
+        required: true,
+        min:[0, "quantity can't be regative"]
+        // validate:{
+        //     validator: (value) =>{
+        //         const isInteger = Number.isInteger(value);
+        //         if(isInteger){
+        //             return true
+        //         }else{
+        //             return false
+        //         }
+        //     }
+        // },
+        // message:"Quantity must be an integer"
+    },
+    status:{
+        type:{
+            type: String,
+            required:true,
+            enum:{
+                values: ['in-stock', "out-of-stock", "discontinued"],
+                message:"Status can't be {VALUE}"
+            }
+        }
+    }, 
+    categories:[{
+        name:{
+            type: String,
+            required:true
+        },
+        _id: mongoose.Schema.Types.ObjectId,
+    }],
+    supplier:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"Supplier or user collection"
     }
-})
+},
+{
+    tymestamp:true,
+}
+)
 
 app.get('/', (req, res) =>{
     res.send('schema design App is running')

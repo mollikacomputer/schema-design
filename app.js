@@ -62,26 +62,37 @@ const productSchema = mongoose.Schema({
             }
         }
     }, 
-    categories:[{
-        name:{
-            type: String,
-            required:true
-        },
-        _id: mongoose.Schema.Types.ObjectId,
-    }],
-    supplier:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"Supplier or user collection"
-    }
-},
-{
-    tymestamp:true,
+//     categories:[{
+//         name:{
+//             type: String,
+//             required:true
+//         },
+//         _id: mongoose.Schema.Types.ObjectId,
+//     }],
+//     supplier:{
+//         type: mongoose.Schema.Types.ObjectId,
+//         ref:"Supplier or user collection"
+//     }
+// },
+// {
+    // tymestamp:true,
 }
 )
-
+// schema patern
+// SCHEMA --> MODEL --> QUERY
+// model name first letter must be will Capital letter
+const Product = mongoose.model('Product', productSchema);
 app.get('/', (req, res) =>{
     res.send('schema design App is running')
 });
 
+app.post('/api/v1/product', (req, res, next) =>{
+    // res.send('it is working');
+    // console.log(req.body);
+    const product = new Product(req.body)
+
+    product.save();
+    
+})
 
 module.exports = app;

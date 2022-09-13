@@ -39,18 +39,18 @@ const productSchema = mongoose.Schema({
     quantity:{
         type: Number,
         required: true,
-        min:[0, "quantity can't be regative"]
-        // validate:{
-        //     validator: (value) =>{
-        //         const isInteger = Number.isInteger(value);
-        //         if(isInteger){
-        //             return true
-        //         }else{
-        //             return false
-        //         }
-        //     }
-        // },
-        // message:"Quantity must be an integer"
+        min: [0, "quantity can not be negative"],
+        validate:{
+            validator: (value) =>{
+                const isInteger = Number.isInteger(value);
+                if(isInteger){
+                    return true
+                }else{
+                    return false
+                }
+            }
+        },
+        message:"Quantity must be an integer"
     },
     status:{
         type:{

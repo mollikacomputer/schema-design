@@ -86,12 +86,25 @@ app.get('/', (req, res) =>{
     res.send('schema design App is running')
 });
 
-app.post('/api/v1/product', (req, res, next) =>{
+app.post('/api/v1/product', async(req, res, next) =>{
     // res.send('it is working');
     // console.log(req.body);
-    const product = new Product(req.body)
+    try {
+        const product = new Product(req.body)
 
-    product.save();
+   const result = await product.save();
+   res.status(200).json({
+    status:'success',
+    message:'Data inserted successfully',
+    data:result
+   })
+    } catch (error) {
+     res.status(400).json({
+        status:'fail',
+        message:'Data is not inserted',
+        error:error.message
+     })   
+    }
     
 })
 

@@ -82,30 +82,38 @@ const productSchema = mongoose.Schema({
 // SCHEMA --> MODEL --> QUERY
 // model name first letter must be will Capital letter
 const Product = mongoose.model('Product', productSchema);
+
+
+// app.post('/api/v1/product', async(req, res, next) =>{
+//     // res.send('it is working');
+//     // console.log(req.body);
+//     try {
+//         const product = new Product(req.body);
+
+//    const result = await product.save();
+//    res.status(200).json({
+//     status:'success',
+//     message:'Data inserted successfully',
+//     data:result
+//    })
+//     } catch (error) {
+//      res.status(400).json({
+//         status:'fail',
+//         message:'Data is not inserted',
+//         error:error.message
+//      })   
+//     }
+    
+// });
+
 app.get('/', (req, res) =>{
     res.send('schema design App is running')
 });
 
-app.post('/api/v1/product', async(req, res, next) =>{
-    // res.send('it is working');
-    // console.log(req.body);
-    try {
-        const product = new Product(req.body)
+// for test post
+app.post('/api/v1/product', (req, res, next)=>{
+    res.send('it is working');
+});
 
-   const result = await product.save();
-   res.status(200).json({
-    status:'success',
-    message:'Data inserted successfully',
-    data:result
-   })
-    } catch (error) {
-     res.status(400).json({
-        status:'fail',
-        message:'Data is not inserted',
-        error:error.message
-     })   
-    }
-    
-})
 
 module.exports = app;

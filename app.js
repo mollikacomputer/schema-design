@@ -112,7 +112,13 @@ app.get('/', (req, res) =>{
 
 // for test post
 app.post('/api/v1/product', (req, res, next)=>{
-    res.send('it is working');
+    // res.send('it is working');
+    console.log(req.body);
+    // save or create
+    // const product = new Product(req.body)
+
+    // product.save()
+    
 });
 
 

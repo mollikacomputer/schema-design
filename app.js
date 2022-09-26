@@ -1,9 +1,9 @@
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const mongoose = require('mongoose');
 // const port = process.env.PORT || 5000;
-const cors = require('cors');
-const colors = require('colors');
+// const colors = require('colors');
 
 // middleware
 app.use(express.json());
@@ -52,16 +52,16 @@ const productSchema = mongoose.Schema({
         },
         message:"Quantity must be an integer"
     },
-    status:{
-        type:{
-            type: String,
-            required:true,
-            enum:{
-                values: ['in-stock', "out-of-stock", "discontinued"],
-                message:"Status can't be {VALUE}"
-            }
-        }
-    }, 
+    // status:{
+    //     type:{
+    //         type: String,
+    //         required:true,
+    //         enum:{
+    //             values: ['in-stock', "out-of-stock", "discontinued"],
+    //             message:"Status can't be {VALUE}"
+    //         }
+    //     }
+    // },
 //     categories:[{
 //         name:{
 //             type: String,
@@ -111,15 +111,26 @@ app.get('/', (req, res) =>{
 });
 
 // for test post
-app.post('/api/v1/product', (req, res, next)=>{
-    // res.send('it is working');
-    console.log(req.body);
-    // save or create
-    // const product = new Product(req.body)
-
-    // product.save()
+app.post("/api/v1/product", async(req, res, next)=>{
+    // console.log(req.body);
+    try{
+      const product = new Product(req.body)
+      const result = await product.save()
     
-});
-
+      res.status(200).json({
+        status:'success',
+        message:'Data inserted successfully',
+        data:result
+      })
+    }catch(error){
+      res.status(400).json({
+        status:'fail',
+        message:'Data is not inserted',
+        error: error.message
+      })
+    }
+    
+    // res.send('successfully data post')
+  });
 
 module.exports = app;

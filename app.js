@@ -52,16 +52,16 @@ const productSchema = mongoose.Schema({
         },
         message:"Quantity must be an integer"
     },
-    // status:{
-    //     type:{
-    //         type: String,
-    //         required:true,
-    //         enum:{
-    //             values: ['in-stock', "out-of-stock", "discontinued"],
-    //             message:"Status can't be {VALUE}"
-    //         }
-    //     }
-    // },
+// have some problem status section
+    status:{
+            type: String,
+            required:true,
+            enum:{
+                values: ['in-stock', "out-of-stock", "discontinued"],
+                message:"Status can't be {VALUE}"
+        }
+    },
+
 //     categories:[{
 //         name:{
 //             type: String,

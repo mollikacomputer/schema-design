@@ -61,6 +61,15 @@ const productSchema = mongoose.Schema({
                 message:"Status can't be {VALUE}"
         }
     },
+    // have some problem categories
+    // categories have some problem i do not find out
+    categories:[{
+        name:{
+            type:String,
+            required:true
+        },
+        _id:mongoose.Schema.Types.ObjectId
+    }]
 
 //     categories:[{
 //         name:{
@@ -75,7 +84,7 @@ const productSchema = mongoose.Schema({
 //     }
 // },
 // {
-    // tymestamp:true,
+    // timestamps:true,
 }
 )
 // schema patern

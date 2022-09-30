@@ -93,6 +93,13 @@ productSchema.pre('save', function(next){
     next()
 });
 
+// mongoose middleware post
+productSchema.post('save', function(doc, next){
+    console.log('After saving data');
+
+    next()
+});
+
 // schema patern
 // SCHEMA --> MODEL --> QUERY
 // model name first letter must be will Capital letter

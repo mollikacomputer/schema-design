@@ -90,6 +90,12 @@ const productSchema = mongoose.Schema({
 // mongoose middlewares for saving data: pre/post
 productSchema.pre('save', function(next){
     console.log('Before saving data');
+
+    // this keyword
+    if(this.quantity == 0){
+        this.status = 'out-of-stock'
+    }
+
     next()
 });
 
@@ -100,6 +106,9 @@ productSchema.post('save', function(doc, next){
     next()
 });
 
+productSchema.methods.logger = function(){
+    console.log(`Data saved for ${this.name}, price is: ${this.price}`);
+}
 // schema patern
 // SCHEMA --> MODEL --> QUERY
 // model name first letter must be will Capital letter
@@ -138,7 +147,9 @@ app.post("/api/v1/product", async(req, res, next)=>{
     try{
       const product = new Product(req.body)
       const result = await product.save()
-    
+    // logger call here
+        result.logger()
+
       res.status(200).json({
         status:'success',
         message:'Data inserted successfully',

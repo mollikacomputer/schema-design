@@ -63,13 +63,13 @@ const productSchema = mongoose.Schema({
     },
     // have some problem categories
     // categories have some problem i do not find out
-    categories:[{
-        name:{
-            type:String,
-            required:true
-        },
-        _id:mongoose.Schema.Types.ObjectId
-    }]
+    // categories:[{
+    //     name:{
+    //         type:String,
+    //         required:true
+    //     },
+    //     _id:mongoose.Schema.Types.ObjectId
+    // }]
 
 //     categories:[{
 //         name:{
@@ -86,7 +86,13 @@ const productSchema = mongoose.Schema({
 // {
     // timestamps:true,
 }
-)
+);
+// mongoose middlewares for saving data: pre/post
+productSchema.pre('save', function(next){
+    console.log('Before saving data');
+    next()
+});
+
 // schema patern
 // SCHEMA --> MODEL --> QUERY
 // model name first letter must be will Capital letter

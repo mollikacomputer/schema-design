@@ -172,16 +172,18 @@ app.post("/api/v1/product", async(req, res, next)=>{
         // const products = await Product.find({})
         // get single data
         // const products = await Product.find({_id:"633727b3ea2dfa148e5c7bd7"})
-        const products = await Product.find({
-            // status:{
-            //     $ne:"out-of-stok"
-            // }
-            
-            name:{
-                $in:["Mobile3", "Mobile"]
-            }
-        })
+        // const products = await Product.find({
+        //     status:{
+        //         $ne:"out-of-stok"
+        //     }
+        //     use in operator
+        //     name:{
+        //         $in:["Mobile3", "Mobile"]
+        //     }
+        // })
         
+        const products = await Product.find({}, "name quantity");
+
         res.status(200).json({
             status:"success",
             data:products

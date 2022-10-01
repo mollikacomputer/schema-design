@@ -188,11 +188,14 @@ app.post("/api/v1/product", async(req, res, next)=>{
         // const products = await Product.find({}).limit(1);
         // const products = await Product.find({}).sort({quantity:-1});
         // const products = await Product.find({}).select({name:1});
-        const products = await Product
-        .where("name").equals(/\w/)
-        .where("quantity").gt(-1).lt(6)
-        .limit(2).sort({quantity:-1})
-
+        // mongoose vs mongodb
+        // const products = await Product
+        // .where("name").equals(/\w/)
+        // .where("quantity").gt(-1).lt(6)
+        // .limit(2).sort({quantity:-1})
+        
+        // mongoose vs mongodb
+        const products = await Product.findById("63320832bb5aa4d6e45b1716");
         res.status(200).json({
             status:"success",
             data:products

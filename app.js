@@ -167,16 +167,18 @@ app.post("/api/v1/product", async(req, res, next)=>{
   });
 
   app.get("/api/v1/product", async(req, res, next) =>{
-
     try {
         // get all data
         // const products = await Product.find({})
         // get single data
         // const products = await Product.find({_id:"633727b3ea2dfa148e5c7bd7"})
-        
         const products = await Product.find({
-            status:{
-                $ne:"out-of-stok"
+            // status:{
+            //     $ne:"out-of-stok"
+            // }
+            
+            name:{
+                $in:["Mobile3", "Mobile"]
             }
         })
         

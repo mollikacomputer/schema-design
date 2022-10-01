@@ -186,7 +186,8 @@ app.post("/api/v1/product", async(req, res, next)=>{
         // without name and quantity show all data
         // const products = await Product.find({}, "-name -quantity");
         // const products = await Product.find({}).limit(1);
-        const products = await Product.find({}).sort({quantity:-1});
+        // const products = await Product.find({}).sort({quantity:-1});
+        const products = await Product.find({}).select({name:1});
 
         res.status(200).json({
             status:"success",

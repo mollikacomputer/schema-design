@@ -181,8 +181,10 @@ app.post("/api/v1/product", async(req, res, next)=>{
         //         $in:["Mobile3", "Mobile"]
         //     }
         // })
-        
-        const products = await Product.find({}, "name quantity");
+        // show all name and quantity
+        // const products = await Product.find({}, "name quantity");
+        // without name and quantity show all data
+        const products = await Product.find({}, "-name -quantity");
 
         res.status(200).json({
             status:"success",

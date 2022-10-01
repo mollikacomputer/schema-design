@@ -184,7 +184,8 @@ app.post("/api/v1/product", async(req, res, next)=>{
         // show all name and quantity
         // const products = await Product.find({}, "name quantity");
         // without name and quantity show all data
-        const products = await Product.find({}, "-name -quantity");
+        // const products = await Product.find({}, "-name -quantity");
+        const products = await Product.find({}).limit(1);
 
         res.status(200).json({
             status:"success",

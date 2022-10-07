@@ -145,8 +145,10 @@ app.get('/', (req, res) =>{
 app.post("/api/v1/product", async(req, res, next)=>{
     // console.log(req.body);
     try{
-      const product = new Product(req.body)
-      const result = await product.save()
+    // // save data
+    //   const product = new Product(req.body)
+    //   const result = await product.save()
+    const result = await Product.create(req.body)
     // logger call here
         result.logger()
 
@@ -195,7 +197,7 @@ app.post("/api/v1/product", async(req, res, next)=>{
         // .limit(2).sort({quantity:-1})
         
         // mongoose vs mongodb
-        const products = await Product.findById("63320832bb5aa4d6e45b1716");
+    const products = await Product.findById("63320832bb5aa4d6e45b1716");
         res.status(200).json({
             status:"success",
             data:products
